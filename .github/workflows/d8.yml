@@ -11,15 +11,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Get depot_tools
-        run: |
-          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-          rustup target add wasm32-unknown-unknown
-          rustup component add rustfmt
-      - name: Clone V8
-        run: mkdir v8-build;cd v8-build;PATH="`pwd`/depot_tools:$PATH" fetch v8
       - name: Build v8
-        run: cd v8-build/v8;gm ia32.release d8
+        run: bash build.sh
       - name: Show files
         run: cd v8;find|grep d8
       - name: Release to GitHub
@@ -29,4 +22,4 @@ jobs:
           automatic_release_tag: d8
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           files: |
-            v8-build/v8/out/ia32.release/*
+            v8/out/ia32.release/*
