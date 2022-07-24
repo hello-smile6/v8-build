@@ -4,4 +4,4 @@ fetch v8
 cd v8
 alias gm="`pwd`/tools/dev/gm.py"
 alias
-gm ia32.release d8
+tools/dev/gm.py ia32.release d8
